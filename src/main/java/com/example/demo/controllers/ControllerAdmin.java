@@ -1,9 +1,17 @@
 package com.example.demo.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@CrossOrigin
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+//@CrossOrigin
+//@RequestMapping(value = "/admin")
 public class ControllerAdmin {
+
+    @GetMapping(value = "/admin")
+    public String checkAdmin(){
+//        model.addAllAttributes()
+        return "admin/index";
+    }
 }
