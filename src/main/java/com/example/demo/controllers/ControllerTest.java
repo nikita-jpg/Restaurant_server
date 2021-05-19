@@ -1,12 +1,10 @@
 package com.example.demo.controllers;
-import com.example.demo.User;
-import com.example.demo.models.Menu;
+import com.example.demo.models.Dish;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -20,12 +18,12 @@ public class ControllerTest {
     private String BASE_URL = "http://localhost:8080/menu/";
 
     @GetMapping("")
-    public Menu getMenu(){
-        Menu menu = new Menu();
-        menu.setTitle("Чикен Макнаггетс (9 шт.)");
-        menu.setDescription("Неподражаемые Чикен Макнаггетс 9 шт. - это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов.");
-        menu.setId_img(1);
-        return menu;
+    public Dish getMenu(){
+        Dish dish = new Dish();
+        dish.setTitle("Чикен Макнаггетс (9 шт.)");
+        dish.setDescription("Неподражаемые Чикен Макнаггетс 9 шт. - это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов.");
+        dish.setId_img(1);
+        return dish;
     }
 
 
