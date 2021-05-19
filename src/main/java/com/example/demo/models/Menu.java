@@ -1,32 +1,22 @@
 package com.example.demo.models;
 
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "menu")
 public class Menu {
+    @Id
+    private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
-    private String img;
+    @Column(name = "ID_IMG")
+    private int id_img;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 }

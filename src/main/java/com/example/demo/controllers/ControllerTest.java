@@ -13,22 +13,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@RestController
+@RestController()
+@RequestMapping(value = "/menu")
 @CrossOrigin
 public class ControllerTest {
     private String BASE_URL = "http://localhost:8080/menu/";
 
-    @GetMapping("/menu")
+    @GetMapping("")
     public Menu getMenu(){
         Menu menu = new Menu();
-        menu.setTitle("Загаловок");
-        menu.setDescription("Описание");
-        menu.setImg(BASE_URL + "1");
+        menu.setTitle("Чикен Макнаггетс (9 шт.)");
+        menu.setDescription("Неподражаемые Чикен Макнаггетс 9 шт. - это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов.");
+        menu.setId_img(1);
         return menu;
     }
 
 
-    @GetMapping("/menu/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getPhoto(@PathVariable("id") String id) throws IOException {
 
