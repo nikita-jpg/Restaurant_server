@@ -24,19 +24,22 @@ import static com.example.demo.DemoApplication.PATH_IMG;
 public class ControllerAdmin {
     private DishService dishService;
 
+
     @Autowired
     public ControllerAdmin(DishService dishService){
         this.dishService = dishService;
     }
 
+
     @GetMapping(value = "/admin")
-    public String checkAdmin(Model model){
+    public String start(Model model){
         model.addAttribute("newDish", new Dish());
         return "admin/index";
     }
 
+    //Загружаем новое блюдо на севрер
     @PostMapping(value = "/admin")
-    public String checkAdmin(Dish dish, @RequestParam("file") MultipartFile file) {
+    public String uploadDish(Dish dish, @RequestParam("file") MultipartFile file) {
         dishService.save(dish);
         String name = Integer.toString(dish.getId());
         if (!file.isEmpty()) {

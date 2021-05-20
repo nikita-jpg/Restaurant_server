@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DishService {
     private MenuRepository menuRepository;
@@ -19,4 +21,7 @@ public class DishService {
         menuRepository.save(dish);
     }
 
+    public List<Dish> getAll(){
+        return menuRepository.findAll();
+    }
 }
