@@ -11,11 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static com.example.demo.DemoApplication.PATH_IMG;
+
 @RestController()
 @RequestMapping(value = "/menu")
 @CrossOrigin
 public class ControllerTest {
     private String BASE_URL = "http://localhost:8080/menu/";
+
 
     @GetMapping("")
     public Dish getMenu(){
@@ -30,9 +33,7 @@ public class ControllerTest {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getPhoto(@PathVariable("id") String id) throws IOException {
-
-        File imgPath = new File("C:\\Users\\Nikita\\Desktop\\images\\test_" + id + ".jpg" );
-
+        File imgPath = new File(PATH_IMG + id + ".jpg" );
         byte[] image = Files.readAllBytes(imgPath.toPath());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

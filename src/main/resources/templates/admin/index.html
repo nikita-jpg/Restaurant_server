@@ -6,7 +6,9 @@
 </head>
 <body>
 <h2>Создайте блюдо</h2>
-<form th:method="POST" th:action="@{/admin}" th:object="${newDish}">
+
+<!--<div>-->
+<form th:method="POST" th:action="@{/admin}" th:object="${newDish}" enctype="multipart/form-data">
     <label>
         Название:
         <input type="text" th:field="*{title}">
@@ -20,9 +22,21 @@
     </label>
 
     <br/>
+    Фото блюда: <input type="file" name="file"><br/>
 
-    <button type="submit">Отправить</button>
+    <button type="submit" value="Upload">Отправить</button>
 </form>
 
+<!--<form th:method="POST" th:action="@{/admin}" >-->
+<!--    -->
+<!--</form>-->
+
+<!--    <form method="POST" enctype="multipart/form-data"-->
+<!--          action="@{/admin}">-->
+<!--        -->
+<!--    </form>-->
+
+
+<!--</div>-->
 </body>
 </html>

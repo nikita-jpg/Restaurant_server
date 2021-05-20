@@ -7,6 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static com.example.demo.DemoApplication.PATH_IMG;
 
 @Controller
 //@CrossOrigin
@@ -26,8 +36,19 @@ public class ControllerAdmin {
     }
 
     @PostMapping(value = "/admin")
-    public String checkAdmin(Dish dish){
+    public String checkAdmin(Dish dish, @RequestParam("file") MultipartFile file) {
         dishService.save(dish);
+        String name = Integer.toString(dish.getId());
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(PATH_IMG + name + ".jpg"));
+                stream.write(bytes);
+                stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }}
         return "redirect:/admin";
     }
 }
