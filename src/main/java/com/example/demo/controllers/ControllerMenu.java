@@ -25,11 +25,13 @@ public class ControllerMenu {
     @Autowired
     ControllerMenu(DishService dishService){
         this.dishService = dishService;
+
     }
 
 
     @GetMapping("")
     public List<Dish> getMenu(){
+//        first.test("21.05.2021");
         return dishService.getAll();
     }
 

@@ -13,9 +13,10 @@ import java.util.List;
 public class Desk {
     @Id
     @Column(name = "number")
-    private int tableNumber;
+    private int deskNumber;
 
-    @OneToMany(mappedBy = "desk")
+    @OneToMany()
+//    @JoinColumn(name = "desk_number")
     private List<Record> records;
 
 }

@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MenuRepository extends JpaRepository<Dish, Integer> {
+public interface DishRepository extends JpaRepository<Dish, Integer> {
 
 //    @Override
 //    <S extends Dish> S save(S s);

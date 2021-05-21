@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,8 +18,12 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recordsIdSeq")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "desk_number")
-    private Desk desk;
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "desk_number")
+    private int desk_number;
+
+    @Column(name = "date")
+    private Calendar calendar;
+
 
 }
