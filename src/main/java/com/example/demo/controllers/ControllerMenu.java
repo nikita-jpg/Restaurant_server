@@ -26,14 +26,10 @@ public class ControllerMenu {
     ControllerMenu(DishService dishService){
         this.dishService = dishService;
     }
-    private String BASE_URL = "http://localhost:8080/menu/";
 
 
     @GetMapping("")
     public List<Dish> getMenu(){
-//        Dish dish = new Dish();
-//        dish.setTitle("Чикен Макнаггетс (9 шт.)");
-//        dish.setDescription("Неподражаемые Чикен Макнаггетс 9 шт. - это сочное 100% белое куриное мясо в хрустящей панировке со специями. Только натуральная курочка без искусственных красителей и ароматизаторов и без консервантов.");
         return dishService.getAll();
     }
 

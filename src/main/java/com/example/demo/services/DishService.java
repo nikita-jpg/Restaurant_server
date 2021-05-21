@@ -1,27 +1,26 @@
 package com.example.demo.services;
 
 import com.example.demo.models.Dish;
-import com.example.demo.repository.MenuRepository;
+import com.example.demo.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DishService {
-    private MenuRepository menuRepository;
+    private DishRepository dishRepository;
 
     @Autowired
-    public DishService(MenuRepository menuRepository){
-        this.menuRepository = menuRepository;
+    public DishService(DishRepository dishRepository){
+        this.dishRepository = dishRepository;
     }
 
     public void save(Dish dish){
-        menuRepository.save(dish);
+        dishRepository.save(dish);
     }
 
     public List<Dish> getAll(){
-        return menuRepository.findAll();
+        return dishRepository.findAll();
     }
 }

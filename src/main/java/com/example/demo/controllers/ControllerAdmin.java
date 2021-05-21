@@ -19,8 +19,6 @@ import java.io.IOException;
 import static com.example.demo.DemoApplication.PATH_IMG;
 
 @Controller
-//@CrossOrigin
-//@RequestMapping(value = "/admin")
 public class ControllerAdmin {
     private DishService dishService;
 

@@ -8,12 +8,13 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+
 @Table(name = "DISHES")
 public class Dish {
     @Id
     @Column(name = "id")
-    @SequenceGenerator(name = "diseshesIdSeq", sequenceName = "dises_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "disesIdSeq")
+    @SequenceGenerator(name = "dishesIdSeq", sequenceName = "dishes_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dishesIdSeq")
     private int id;
     @Column(name = "title")
     private String title;
