@@ -11,7 +11,8 @@ public class DemoApplication {
     //Указывает на путь к папке с картинками
     public final static String PATH_IMG = "C:\\Users\\Nikita\\Desktop\\images\\";
 //    public final static String DATE_FORMAT = ;
-    public final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy.MM.dd", Locale.getDefault());
+    public final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy.MM.dd", Locale.getDefault());
+    public final static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.getDefault());
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }

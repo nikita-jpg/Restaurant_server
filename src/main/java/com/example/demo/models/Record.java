@@ -5,8 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -23,14 +22,14 @@ public class Record {
     @Column(name = "desk_number")
     private int deskNumber;
 
-    @Column(name = "date")
+    @Column(name = "start_date")
     private LocalDate date;
 
-//    @Column(name = "start")
-//    private String start;
-//
-//    @Column(name = "end")
-//    private String end;
+    @Column(name = "start_time")
+    private LocalTime start;
+
+    @Column(name = "end_time")
+    private LocalTime end;
 
 
 }

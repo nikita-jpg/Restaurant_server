@@ -1,18 +1,16 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Desk;
 import com.example.demo.models.Record;
 import com.example.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.util.*;
 
-import static com.example.demo.DemoApplication.DATE_FORMAT;
+import static com.example.demo.DemoApplication.DATE_FORMATTER;
+import static com.example.demo.DemoApplication.TIME_FORMATTER;
 
 @RestController
 @RequestMapping(value = "/booking")
@@ -43,12 +41,15 @@ public class BookingController {
                            @RequestParam(value = "start") String startStr,
                            @RequestParam(value = "end") String endStr
                            ){
-        LocalDate date = LocalDate.parse(dateStr, DATE_FORMAT);
+        LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
+        LocalTime start = LocalTime.parse(startStr, TIME_FORMATTER);
+        LocalTime end = LocalTime.parse(endStr, TIME_FORMATTER);
+
         Record record = new Record();
         record.setDeskNumber(deskNumber);
         record.setDate(date);
-//        record.setStart(start);
-//        record.setEnd(end);
+        record.setStart(start);
+        record.setEnd(end);
         bookingService.saveRecord(record);
     }
 }
