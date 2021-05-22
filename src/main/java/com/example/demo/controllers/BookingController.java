@@ -6,8 +6,13 @@ import com.example.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+import static com.example.demo.DemoApplication.DATE_FORMAT;
 
 @RestController
 @RequestMapping(value = "/booking")
@@ -22,8 +27,8 @@ public class BookingController {
 
     @GetMapping("/getRecord")
     @ResponseBody
-    public Desk getRecord(){
-        return bookingService.getDeskById(1);
+    public Map<Integer, List<Calendar>> getRecord(){
+        return bookingService.getAllDesksCalendars();
 //        Calendar calendar = new GregorianCalendar(2017, 0 , 25);
 //        Record record = new Record();
 //        record.setCalendar(calendar);
@@ -33,12 +38,17 @@ public class BookingController {
 
     @GetMapping("/makeRecord")
     @ResponseBody
-    public void makeRecord(){
-        Calendar calendar = new GregorianCalendar(2017, 0 , 25);
+    public void makeRecord(@RequestParam(value = "deskNumber") int deskNumber,
+                           @RequestParam(value = "date") String dateStr,
+                           @RequestParam(value = "start") String startStr,
+                           @RequestParam(value = "end") String endStr
+                           ){
+        LocalDate date = LocalDate.parse(dateStr, DATE_FORMAT);
         Record record = new Record();
-        record.setCalendar(calendar);
-        record.setDesk_number(bookingService.getDeskById(1).getDeskNumber());
-        bookingService.getDeskById(1).getRecords().add(record);
+        record.setDeskNumber(deskNumber);
+        record.setDate(date);
+//        record.setStart(start);
+//        record.setEnd(end);
         bookingService.saveRecord(record);
     }
 }

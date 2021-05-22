@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,10 +21,16 @@ public class Record {
 
 //    @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "desk_number")
-    private int desk_number;
+    private int deskNumber;
 
     @Column(name = "date")
-    private Calendar calendar;
+    private LocalDate date;
+
+//    @Column(name = "start")
+//    private String start;
+//
+//    @Column(name = "end")
+//    private String end;
 
 
 }
