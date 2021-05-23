@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <head>
+        <title>Поиск</title>
+    </head>
 </head>
 <body>
 
@@ -16,16 +19,22 @@
     <br/>
 </div>
 
-</table>
-<tr>
-    <td>First</td>
-    <td>Second</td>
-</tr>
+<table>
 
-<tr th:each="record: ${recordList}">
-    <td th:text="${record.getDate()}"></td>
-    <td th:text="${record.getStart()}"></td>
-</tr>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Second</th>
+    </tr>
+    </thead>
+
+    <tbody th:each="record: ${recordList}">
+        <tr >
+            <td th:text="${record.getDate()}"></td>
+            <td th:text="${record.getStart()}"></td>
+        </tr>
+    </tbody>
+
 </table>
 
 </body>
