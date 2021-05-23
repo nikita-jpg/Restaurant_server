@@ -72,6 +72,12 @@ public class AdminController {
         return "/admin/searchPage";
     }
 
+    @PostMapping(value = "/searchClient/delete")
+    public String deleteRecord(@RequestParam("id") int id){
+        bookingService.deleteRecordById(id);
+        return "/admin/searchPage";
+    }
+
 
 //    @PostMapping(value = "/admin/searchClient")
 //    public String getRecords(@RequestParam("clientName") String clientName, Model model){

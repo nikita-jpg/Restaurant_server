@@ -25,18 +25,20 @@ public class BookingService {
         this.deskRepository = deskRepository;
     }
 
+    public void saveRecord(Record record){
+        recordRepository.save(record);
+    }
+    public void deleteRecordById(int id){
+        recordRepository.deleteById(id);
+    }
     public List<Record> getRecordsByName(String name){
         return recordRepository.findAllByClientName(name);
     }
 
-    public void saveRecord(Record record){
-        recordRepository.save(record);
-    }
 
     public Desk getDeskById(int id){
         return deskRepository.findById(id).get();
     }
-
     public Map<Integer,List<LocalTime>> getAllDesksCalendars(LocalDate neededDate){
         Map<Integer,List<LocalTime>> map = new LinkedHashMap<>();
 
@@ -60,6 +62,7 @@ public class BookingService {
 
         return map;
     }
+
 
     public List<LocalTime> getFreeTimeList(List<Record> records){
         List<LocalTime> timeList = new ArrayList<>();

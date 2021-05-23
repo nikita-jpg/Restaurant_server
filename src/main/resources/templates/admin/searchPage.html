@@ -34,8 +34,14 @@
             <td th:text="${record.getStart()}"></td>
         </tr>
     </tbody>
-
 </table>
+
+<form method="POST" th:action="@{/admin/searchClient/delete}">
+    Введите id записи для удаления:
+    <input type="text" name="id">
+    <button type="submit" >Удалить</button>
+</form>
+
 
 </body>
 </html>
