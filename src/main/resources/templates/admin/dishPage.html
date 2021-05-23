@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Создание блюда</title>
@@ -7,8 +7,8 @@
 <body>
 <h2>Создайте блюдо</h2>
 
-<!--<div>-->
-<form th:method="POST" th:action="@{/admin}" th:object="${newDish}" enctype="multipart/form-data">
+<div>
+<form th:method="POST" th:action="@{/admin/uploadDish}" th:object="${newDish}" enctype="multipart/form-data">
     <label>
         Название:
         <input type="text" th:field="*{title}">
@@ -26,6 +26,9 @@
 
     <button type="submit" value="Upload">Отправить</button>
 </form>
+</div>
+
+
 
 <!--<form th:method="POST" th:action="@{/admin}" >-->
 <!--    -->

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <br/>
+    <form method="POST" th:action="@{/admin/searchClient}">
+        Имя клиента:
+        <input type="text" name="clientName">
+        <button type="submit" >Поиск</button>
+    </form>
+    <br/>
+</div>
+
+</table>
+<tr>
+    <td>First</td>
+    <td>Second</td>
+</tr>
+
+<tr th:each="record: ${recordList}">
+    <td th:text="${record.getDate()}"></td>
+    <td th:text="${record.getStart()}"></td>
+</tr>
+</table>
+
+</body>
+</html>

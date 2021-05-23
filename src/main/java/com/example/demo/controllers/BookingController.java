@@ -35,7 +35,8 @@ public class BookingController {
     public void makeRecord(@RequestParam(value = "deskNumber") int deskNumber,
                            @RequestParam(value = "date") String dateStr,
                            @RequestParam(value = "start") String startStr,
-                           @RequestParam(value = "end") String endStr
+                           @RequestParam(value = "end") String endStr,
+                           @RequestParam(value = "clientName") String clientName
                            ){
         LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
         LocalTime start = LocalTime.parse(startStr, TIME_FORMATTER);
@@ -46,6 +47,7 @@ public class BookingController {
         record.setDate(date);
         record.setStart(start);
         record.setEnd(end);
+        record.setClientName(clientName);
         bookingService.saveRecord(record);
     }
 }

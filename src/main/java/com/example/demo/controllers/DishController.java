@@ -19,11 +19,11 @@ import static com.example.demo.DemoApplication.PATH_IMG;
 @RestController()
 @RequestMapping(value = "/menu")
 @CrossOrigin
-public class ControllerMenu {
+public class DishController {
     private DishService dishService;
 
     @Autowired
-    ControllerMenu(DishService dishService){
+    DishController(DishService dishService){
         this.dishService = dishService;
 
     }

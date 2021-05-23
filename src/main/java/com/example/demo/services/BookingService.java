@@ -25,7 +25,9 @@ public class BookingService {
         this.deskRepository = deskRepository;
     }
 
-//    public
+    public List<Record> getRecordsByName(String name){
+        return recordRepository.findAllByClientName(name);
+    }
 
     public void saveRecord(Record record){
         recordRepository.save(record);

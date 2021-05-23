@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Integer> {
+    public List<Record> findAllByClientName(String clientName);
 
     public List<Record> findRecordByDeskNumberAndDate(int deskNumber, LocalDate date);
 }

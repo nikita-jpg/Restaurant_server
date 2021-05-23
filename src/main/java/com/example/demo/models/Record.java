@@ -31,5 +31,7 @@ public class Record {
     @Column(name = "end_time")
     private LocalTime end;
 
+    @Column(name = "client_name")
+    private String clientName;
 
 }
