@@ -16,8 +16,8 @@ public class Desk {
     @Column(name = "number")
     private int deskNumber;
 
-    @OneToMany()
-//    @JoinColumn(name = "desk_number")
-    private List<Record> records;
+//    @OneToMany()
+////    @JoinColumn(name = "desk_number")
+//    private List<Record> records;
 
 }

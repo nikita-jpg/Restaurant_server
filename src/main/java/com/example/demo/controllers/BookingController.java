@@ -25,13 +25,9 @@ public class BookingController {
 
     @GetMapping("/getRecord")
     @ResponseBody
-    public Map<Integer, List<Calendar>> getRecord(){
-        return bookingService.getAllDesksCalendars();
-//        Calendar calendar = new GregorianCalendar(2017, 0 , 25);
-//        Record record = new Record();
-//        record.setCalendar(calendar);
-//        record.setDesk(bookingService.getDeskById(1));
-//        bookingService.saveRecord(record);
+    public Map<Integer, List<LocalTime>> getRecord(
+            @RequestParam(value = "date") String dateStr){
+        return bookingService.getAllDesksCalendars(LocalDate.parse(dateStr, DATE_FORMATTER));
     }
 
     @GetMapping("/makeRecord")

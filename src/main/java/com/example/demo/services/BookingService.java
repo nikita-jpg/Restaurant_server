@@ -7,7 +7,12 @@ import com.example.demo.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
+
+import static com.example.demo.DemoApplication.CLOSE_TIME_WORKING_WEEK;
+import static com.example.demo.DemoApplication.OPEN_TIME_WORKING_WEEK;
 
 @Service
 public class BookingService {
@@ -30,21 +35,58 @@ public class BookingService {
         return deskRepository.findById(id).get();
     }
 
-    public Map<Integer,List<Calendar>> getAllDesksCalendars(){
-        List<Desk> desks = deskRepository.findAll();
-        List<Record> records;
-        Map<Integer,List<Calendar>> dictionary = new HashMap<>();
-        List<Calendar> calendars = new ArrayList<>();
+    public Map<Integer,List<LocalTime>> getAllDesksCalendars(LocalDate neededDate){
+        Map<Integer,List<LocalTime>> map = new LinkedHashMap<>();
 
-//        for(int i=1;i<desks.size()+1;i++){
-//            records = desks.get(i-1).getRecords();
-//            if(records.size()!=0){
-//                for(int j=0;j<records.size();j++)
-//                    calendars.add(records.get(j).getCalendar());
-//                dictionary.put(i,calendars);
-//                calendars = new ArrayList<>();
-//            }
-//        }
-        return dictionary;
+        //Тут хранится список свободных временных промежутков
+        List<LocalTime> timeList;
+
+        //Получили все активные столы.
+        List<Desk> desks = deskRepository.findAll();
+
+        //Пробегаемся по всем активным столам
+        for(int i=1;i<desks.size()+1;i++){
+
+            //Получаем записи к активным столам с пометкой на дату
+            List<Record> records = recordRepository.findRecordByDeskNumberAndDate(i,neededDate);
+
+            //Получаем список свободных временных промежутков
+            timeList = getFreeTimeList(records);
+
+            map.put(i,timeList);
+        }
+
+        return map;
+    }
+
+    public List<LocalTime> getFreeTimeList(List<Record> records){
+        List<LocalTime> timeList = new ArrayList<>();
+        if(records.size()==0)
+            return timeList;
+
+        LocalTime start = OPEN_TIME_WORKING_WEEK;
+        LocalTime finish = records.get(0).getStart();
+
+        if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
+            timeList.add(start);
+            timeList.add(finish.minusMinutes(30));
+        }
+
+        for (int i=1;i<records.size()-1;i++){
+            start = records.get(i).getEnd();
+            finish = records.get(i+1).getStart();
+            if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
+                timeList.add(start.plusMinutes(30));
+                timeList.add(finish.minusMinutes(30));
+            }
+        }
+
+        start = records.get(records.size()-1).getEnd();
+        finish = CLOSE_TIME_WORKING_WEEK;
+        if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
+            timeList.add(start.plusMinutes(30));
+            timeList.add(finish);
+        }
+        return timeList;
     }
 }
