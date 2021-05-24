@@ -9,6 +9,4 @@ import java.util.List;
 
 public interface DeskRepository extends JpaRepository<Desk, Integer> {
 
-//    @Query("SELECT * FROM DESKS, RECORDS WHERE DESKS.ID=DESK_NUMBER AND RECORDS.")
-//    public List<Record> findAllBy
 }

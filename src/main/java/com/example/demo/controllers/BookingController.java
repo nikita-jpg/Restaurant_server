@@ -25,7 +25,7 @@ public class BookingController {
 
     @GetMapping("/getRecord")
     @ResponseBody
-    public Map<Integer, List<LocalTime>> getRecord(
+    public Map<Integer, List<String>> getRecord(
             @RequestParam(value = "date") String dateStr){
         return bookingService.getAllDesksCalendars(LocalDate.parse(dateStr, DATE_FORMATTER));
     }
@@ -36,7 +36,9 @@ public class BookingController {
                            @RequestParam(value = "date") String dateStr,
                            @RequestParam(value = "start") String startStr,
                            @RequestParam(value = "end") String endStr,
-                           @RequestParam(value = "clientName") String clientName
+                           @RequestParam(value = "clientName") String clientName,
+                           @RequestParam(value = "clientSecondName") String clientSecondName,
+                           @RequestParam(value = "clientTelNumber") String clientTelNumber
                            ){
         LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
         LocalTime start = LocalTime.parse(startStr, TIME_FORMATTER);
@@ -48,6 +50,8 @@ public class BookingController {
         record.setStart(start);
         record.setEnd(end);
         record.setClientName(clientName);
+        record.setClientSecondName(clientSecondName);
+        record.setClientTelNumber(clientTelNumber);
         bookingService.saveRecord(record);
     }
 }

@@ -57,7 +57,7 @@ public class AdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }}
-        return "/admin/dishPage";
+        return "redirect:/admin/dishPage";
     }
 
     @GetMapping(value = "/searchPage")

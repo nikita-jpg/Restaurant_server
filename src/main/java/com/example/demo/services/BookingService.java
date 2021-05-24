@@ -39,11 +39,11 @@ public class BookingService {
     public Desk getDeskById(int id){
         return deskRepository.findById(id).get();
     }
-    public Map<Integer,List<LocalTime>> getAllDesksCalendars(LocalDate neededDate){
-        Map<Integer,List<LocalTime>> map = new LinkedHashMap<>();
+    public Map<Integer,List<String>> getAllDesksCalendars(LocalDate neededDate){
+        Map<Integer,List<String>> map = new LinkedHashMap<>();
 
         //Тут хранится список свободных временных промежутков
-        List<LocalTime> timeList;
+        List<String> timeList;
 
         //Получили все активные столы.
         List<Desk> desks = deskRepository.findAll();
@@ -64,33 +64,36 @@ public class BookingService {
     }
 
 
-    public List<LocalTime> getFreeTimeList(List<Record> records){
-        List<LocalTime> timeList = new ArrayList<>();
-        if(records.size()==0)
+    public List<String> getFreeTimeList(List<Record> records){
+        List<String> timeList = new ArrayList<>();
+        if(records.size()==0){
+            timeList.add(OPEN_TIME_WORKING_WEEK.toString());
+            timeList.add(CLOSE_TIME_WORKING_WEEK.toString());
             return timeList;
+        }
 
         LocalTime start = OPEN_TIME_WORKING_WEEK;
         LocalTime finish = records.get(0).getStart();
 
         if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-            timeList.add(start);
-            timeList.add(finish.minusMinutes(30));
+            timeList.add(start.toString());
+            timeList.add(finish.minusMinutes(30).toString());
         }
 
         for (int i=1;i<records.size()-1;i++){
             start = records.get(i).getEnd();
             finish = records.get(i+1).getStart();
             if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-                timeList.add(start.plusMinutes(30));
-                timeList.add(finish.minusMinutes(30));
+                timeList.add(start.plusMinutes(30).toString());
+                timeList.add(finish.minusMinutes(30).toString());
             }
         }
 
         start = records.get(records.size()-1).getEnd();
         finish = CLOSE_TIME_WORKING_WEEK;
         if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-            timeList.add(start.plusMinutes(30));
-            timeList.add(finish);
+            timeList.add(start.plusMinutes(30).toString());
+            timeList.add(finish.toString());
         }
         return timeList;
     }

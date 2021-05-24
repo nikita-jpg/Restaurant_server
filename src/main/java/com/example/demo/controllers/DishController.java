@@ -31,7 +31,6 @@ public class DishController {
 
     @GetMapping("")
     public List<Dish> getMenu(){
-//        first.test("21.05.2021");
         return dishService.getAll();
     }
 

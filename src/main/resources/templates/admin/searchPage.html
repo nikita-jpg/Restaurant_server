@@ -8,7 +8,7 @@
     </head>
 </head>
 <body>
-
+<a href="/admin/dishPage">Добавление блюда</a>
 <div>
     <br/>
     <form method="POST" th:action="@{/admin/searchClient}">
@@ -26,14 +26,24 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Second</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Номер телефона</th>
+        <th>Дата бронирования</th>
+        <th>Время начала</th>
+        <th>Время конца</th>
     </tr>
     </thead>
 
     <tbody th:each="record: ${recordList}">
         <tr >
+            <td th:text="${record.getId()}"></td>
+            <td th:text="${record.getClientName()}"></td>
+            <td th:text="${record.getClientSecondName()}"></td>
+            <td th:text="${record.getClientTelNumber()}"></td>
             <td th:text="${record.getDate()}"></td>
             <td th:text="${record.getStart()}"></td>
+            <td th:text="${record.getEnd()}"></td>
         </tr>
     </tbody>
 </table>
