@@ -34,4 +34,7 @@ public class Record {
     @Column(name = "client_name")
     private String clientName;
 
+    @Column(name = "client_second_name")
+    private String clientSecondName;
+
 }

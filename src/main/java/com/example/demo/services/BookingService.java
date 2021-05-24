@@ -31,8 +31,8 @@ public class BookingService {
     public void deleteRecordById(int id){
         recordRepository.deleteById(id);
     }
-    public List<Record> getRecordsByName(String name){
-        return recordRepository.findAllByClientName(name);
+    public List<Record> getRecordsByNameAndSecondName(String clientName,String clientSecondName){
+        return recordRepository.findAllByClientNameAndClientSecondName(clientName, clientSecondName);
     }
 
 

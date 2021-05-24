@@ -66,8 +66,8 @@ public class AdminController {
     }
 
     @PostMapping(value = "/searchClient")
-    public String searchClient(@RequestParam("clientName") String clientName, Model model){
-        List<Record> list = bookingService.getRecordsByName(clientName);
+    public String searchClient(@RequestParam("clientName") String clientName, @RequestParam("clientSecondName") String clientSecondName, Model model){
+        List<Record> list = bookingService.getRecordsByNameAndSecondName(clientName, clientSecondName);
         model.addAttribute("recordList",list);
         return "/admin/searchPage";
     }
