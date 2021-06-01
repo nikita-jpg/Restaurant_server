@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <title>Поиск</title>
+    </head>
+</head>
+<body>
+<a href="/admin/dishPage">Добавление блюда</a>
+<div>
+    <br/>
+    <form method="POST" th:action="@{/admin/searchClient}">
+        Имя клиента:
+        <input type="text" name="clientName">
+        Фамилия клиента:
+        <input type="text" name="clientSecondName">
+        <button type="submit" >Поиск</button>
+    </form>
+    <br/>
+</div>
+
+<table>
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Номер телефона</th>
+        <th>Дата бронирования</th>
+        <th>Время начала</th>
+        <th>Время конца</th>
+    </tr>
+    </thead>
+
+    <tbody th:each="record: ${recordList}">
+        <tr >
+            <td th:text="${record.getId()}"></td>
+            <td th:text="${record.getClientName()}"></td>
+            <td th:text="${record.getClientSecondName()}"></td>
+            <td th:text="${record.getClientTelNumber()}"></td>
+            <td th:text="${record.getDate()}"></td>
+            <td th:text="${record.getStart()}"></td>
+            <td th:text="${record.getEnd()}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<form method="POST" th:action="@{/admin/searchClient/delete}">
+    Введите id записи для удаления:
+    <input type="text" name="id">
+    <button type="submit" >Удалить</button>
+</form>
+
+
+</body>
+</html>

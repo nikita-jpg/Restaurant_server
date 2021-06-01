@@ -79,10 +79,4 @@ public class AdminController {
     }
 
 
-//    @PostMapping(value = "/admin/searchClient")
-//    public String getRecords(@RequestParam("clientName") String clientName, Model model){
-//        List<Record> list = bookingService.getRecordsByName(clientName);
-//        model.addAttribute("recordList",list);
-//        return "redirect:/admin";
-//    }
 }

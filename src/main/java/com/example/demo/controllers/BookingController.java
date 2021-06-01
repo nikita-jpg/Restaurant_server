@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Day;
 import com.example.demo.models.Record;
 import com.example.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class BookingController {
 
     @GetMapping("/getRecord")
     @ResponseBody
-    public Map<Integer, List<String>> getRecord(
+    public List<Day> getRecord(
             @RequestParam(value = "date") String dateStr){
         return bookingService.getAllDesksCalendars(LocalDate.parse(dateStr, DATE_FORMATTER));
     }

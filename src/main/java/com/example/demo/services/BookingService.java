@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Day;
 import com.example.demo.models.Desk;
 import com.example.demo.models.Record;
 import com.example.demo.repository.DeskRepository;
@@ -39,28 +40,30 @@ public class BookingService {
     public Desk getDeskById(int id){
         return deskRepository.findById(id).get();
     }
-    public Map<Integer,List<String>> getAllDesksCalendars(LocalDate neededDate){
-        Map<Integer,List<String>> map = new LinkedHashMap<>();
+    public List<Day> getAllDesksCalendars(LocalDate neededDate){
+//        Map<Integer,List<String>> map = new LinkedHashMap<>();
 
-        //Тут хранится список свободных временных промежутков
-        List<String> timeList;
+        List<Day> list = new ArrayList<>();
 
         //Получили все активные столы.
         List<Desk> desks = deskRepository.findAll();
 
         //Пробегаемся по всем активным столам
-        for(int i=1;i<desks.size()+1;i++){
+        for(int i=0;i<desks.size();i++){
+            Day day = new Day();
+            day.setTableId(desks.get(i).getDeskNumber());
 
             //Получаем записи к активным столам с пометкой на дату
             List<Record> records = recordRepository.findRecordByDeskNumberAndDate(i,neededDate);
 
             //Получаем список свободных временных промежутков
-            timeList = getFreeTimeList(records);
+            day.setFreeTime(getFreeTimeList(records));
+            list.add(day);
 
-            map.put(i,timeList);
+//            map.put(i,timeList);
         }
 
-        return map;
+        return list;
     }
 
 

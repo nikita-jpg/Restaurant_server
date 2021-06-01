@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание блюда</title>
+</head>
+<body>
+<a href="/admin/searchPage">Поиск записи</a>
+<h2>Создайте блюдо</h2>
+
+<div>
+<form th:method="POST" th:action="@{/admin/uploadDish}" th:object="${newDish}" enctype="multipart/form-data">
+    <label>
+        Название:
+        <input type="text" th:field="*{title}">
+    </label>
+
+    <br/>
+
+    <label>
+        Дата создания:
+        <input type="text" th:field="*{description}">
+    </label>
+
+    <br/>
+    Фото блюда: <input type="file" name="file"><br/>
+
+    <button type="submit" value="Upload">Отправить</button>
+</form>
+</div>
+
+
+
+<!--<form th:method="POST" th:action="@{/admin}" >-->
+<!--    -->
+<!--</form>-->
+
+<!--    <form method="POST" enctype="multipart/form-data"-->
+<!--          action="@{/admin}">-->
+<!--        -->
+<!--    </form>-->
+
+
+<!--</div>-->
+</body>
+</html>
