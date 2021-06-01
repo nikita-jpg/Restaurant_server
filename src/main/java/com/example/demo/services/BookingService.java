@@ -41,8 +41,6 @@ public class BookingService {
         return deskRepository.findById(id).get();
     }
     public List<Day> getAllDesksCalendars(LocalDate neededDate){
-//        Map<Integer,List<String>> map = new LinkedHashMap<>();
-
         List<Day> list = new ArrayList<>();
 
         //Получили все активные столы.
@@ -60,7 +58,6 @@ public class BookingService {
             day.setFreeTime(getFreeTimeList(records));
             list.add(day);
 
-//            map.put(i,timeList);
         }
 
         return list;
@@ -70,8 +67,7 @@ public class BookingService {
     public List<String> getFreeTimeList(List<Record> records){
         List<String> timeList = new ArrayList<>();
         if(records.size()==0){
-            timeList.add(OPEN_TIME_WORKING_WEEK.toString());
-            timeList.add(CLOSE_TIME_WORKING_WEEK.toString());
+            timeList.add(OPEN_TIME_WORKING_WEEK.toString() + " - " + CLOSE_TIME_WORKING_WEEK.toString());
             return timeList;
         }
 
@@ -79,24 +75,21 @@ public class BookingService {
         LocalTime finish = records.get(0).getStart();
 
         if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-            timeList.add(start.toString());
-            timeList.add(finish.minusMinutes(30).toString());
+            timeList.add(start.toString() + " - " + finish.minusMinutes(30).toString());
         }
 
         for (int i=1;i<records.size()-1;i++){
             start = records.get(i).getEnd();
             finish = records.get(i+1).getStart();
             if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-                timeList.add(start.plusMinutes(30).toString());
-                timeList.add(finish.minusMinutes(30).toString());
+                timeList.add(start.plusMinutes(30).toString() + " - " + finish.minusMinutes(30).toString());
             }
         }
 
         start = records.get(records.size()-1).getEnd();
         finish = CLOSE_TIME_WORKING_WEEK;
         if( (finish.getHour()*60+finish.getMinute()) - (start.getHour()*60+start.getMinute()) > 90){
-            timeList.add(start.plusMinutes(30).toString());
-            timeList.add(finish.toString());
+            timeList.add(start.plusMinutes(30).toString() + " - " + finish.toString());
         }
         return timeList;
     }

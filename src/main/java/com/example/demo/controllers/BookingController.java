@@ -26,8 +26,7 @@ public class BookingController {
 
     @GetMapping("/getRecord")
     @ResponseBody
-    public List<Day> getRecord(
-            @RequestParam(value = "date") String dateStr){
+    public List<Day> getRecord( @RequestParam(value = "date") String dateStr ){
         return bookingService.getAllDesksCalendars(LocalDate.parse(dateStr, DATE_FORMATTER));
     }
 
@@ -35,8 +34,8 @@ public class BookingController {
     @ResponseBody
     public void makeRecord(@RequestParam(value = "deskNumber") int deskNumber,
                            @RequestParam(value = "date") String dateStr,
-                           @RequestParam(value = "start") String startStr,
-                           @RequestParam(value = "end") String endStr,
+                           @RequestParam(value = "timeStart") String startStr,
+                           @RequestParam(value = "timeEnd") String endStr,
                            @RequestParam(value = "clientName") String clientName,
                            @RequestParam(value = "clientSecondName") String clientSecondName,
                            @RequestParam(value = "clientTelNumber") String clientTelNumber
