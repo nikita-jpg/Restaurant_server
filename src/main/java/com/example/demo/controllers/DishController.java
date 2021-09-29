@@ -16,25 +16,31 @@ import java.util.List;
 
 import static com.example.demo.DemoApplication.PATH_IMG;
 
+/**
+ * Класс обрабатывающий все запросы по пути "/menu".
+ * Содержит свойство <b>dishService</b>.
+ */
 @RestController()
 @RequestMapping(value = "/menu")
 @CrossOrigin
 public class DishController {
+
+    /** Объект для работы с блюдами*/
     private DishService dishService;
 
+    /** Конструктор - создание нового объекта */
     @Autowired
     DishController(DishService dishService){
         this.dishService = dishService;
-
     }
 
-
+    /** Метод для получения всех блюд*/
     @GetMapping("")
     public List<Dish> getMenu(){
         return dishService.getAll();
     }
 
-
+    /** Метод для картинки по её id*/
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getPhoto(@PathVariable("id") String id) throws IOException {

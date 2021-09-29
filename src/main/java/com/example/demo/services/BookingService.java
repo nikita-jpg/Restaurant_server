@@ -15,31 +15,49 @@ import java.util.*;
 import static com.example.demo.DemoApplication.CLOSE_TIME_WORKING_WEEK;
 import static com.example.demo.DemoApplication.OPEN_TIME_WORKING_WEEK;
 
+/**
+ * Класс служит для работы с сущностями в БД
+ * Содержит свойства <b>recordRepository</b> и <b>deskRepository</b>.
+ */
 @Service
 public class BookingService {
+
+    /** Хранит Репозиторий для работы с бронями*/
     private RecordRepository recordRepository;
+
+    /** Хранит Репозиторий для работы со столиками*/
     private DeskRepository deskRepository;
 
+    /** Конструктор - создание нового объекта */
     @Autowired
     public BookingService(RecordRepository recordRepository, DeskRepository deskRepository){
         this.recordRepository = recordRepository;
         this.deskRepository = deskRepository;
     }
 
+    /**Метод служит для сохранения брони в БД*/
     public void saveRecord(Record record){
         recordRepository.save(record);
     }
+
+    /**Метод служит для удаления брони из БД*/
     public void deleteRecordById(int id){
         recordRepository.deleteById(id);
     }
+
+    /**Метод служит для получения списка броней пользователя по имени и фамилии из БД*/
     public List<Record> getRecordsByNameAndSecondName(String clientName,String clientSecondName){
         return recordRepository.findAllByClientNameAndClientSecondName(clientName, clientSecondName);
     }
 
-
+    /**Метод служит для получения столика по его id из БД. <b>В проекте нигде не используется</b>"*/
     public Desk getDeskById(int id){
         return deskRepository.findById(id).get();
     }
+
+    /**Метод служит для получения всех столиков из БД по дате.
+     * @see com.example.demo.DemoApplication#DATE_FORMATTER
+     */
     public List<Day> getAllDesksCalendars(LocalDate neededDate){
         List<Day> list = new ArrayList<>();
 
@@ -63,7 +81,11 @@ public class BookingService {
         return list;
     }
 
-
+    /**Метод служит для получения списка свободного времени для бронирования на неделю для каждого столика
+     * @see com.example.demo.DemoApplication#OPEN_TIME_WORKING_WEEK
+     * @see com.example.demo.DemoApplication#CLOSE_TIME_WORKING_WEEK
+     * @return "номер столика":["начала свободного промежутка","конец свободного промежутка"] Пример: {"1":["9:00","18:30","21:30","23:30"], "2":["10:00","14:30","21:30","23:30"]}
+     */
     public List<String> getFreeTimeList(List<Record> records){
         List<String> timeList = new ArrayList<>();
         if(records.size()==0){

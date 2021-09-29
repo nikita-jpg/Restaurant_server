@@ -13,23 +13,43 @@ import java.util.*;
 import static com.example.demo.DemoApplication.DATE_FORMATTER;
 import static com.example.demo.DemoApplication.TIME_FORMATTER;
 
+/**
+ * Класс обрабатывающий все запросы по пути "/booking".
+ * Содержит свойство <b>bookingService</b>.
+ */
 @RestController
 @RequestMapping(value = "/booking")
 @CrossOrigin
 public class BookingController {
+
+    /** Объект для работы с бронированием*/
     BookingService bookingService;
 
+    /** Конструктор - создание нового объекта */
     @Autowired
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
 
+    /**
+     * Метод для получения броней на определённую дату.
+     * Принимает параметр с названием "date". Это строка, содержащую дату. Формат строки описывает DATE_FORMATTER.
+     * @see com.example.demo.DemoApplication#DATE_FORMATTER
+     * @see BookingService#getAllDesksCalendars(LocalDate)
+     */
     @GetMapping("/getRecord")
     @ResponseBody
     public List<Day> getRecord( @RequestParam(value = "date") String dateStr ){
         return bookingService.getAllDesksCalendars(LocalDate.parse(dateStr, DATE_FORMATTER));
     }
 
+    /**
+     * Метод для создания и сохранения брони.
+     * timeStart - время начала брони, timeEnd - время конца брони.
+     * @see com.example.demo.DemoApplication#DATE_FORMATTER
+     * @see com.example.demo.DemoApplication#TIME_FORMATTER
+     * @see BookingService#saveRecord(Record)
+     */
     @GetMapping("/makeRecord")
     @ResponseBody
     public void makeRecord(@RequestParam(value = "deskNumber") int deskNumber,

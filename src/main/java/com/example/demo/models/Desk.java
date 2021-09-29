@@ -7,17 +7,19 @@ import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Класс описывает модель "Столик" ".
+ * Содержит свойство <b>deskNumber</b>.
+ */
 @Getter
 @Setter
 @Entity
 @Table(name = "DESKS")
 public class Desk {
+
+    /** Хранит номер столика*/
     @Id
     @Column(name = "number")
     private int deskNumber;
-
-//    @OneToMany()
-////    @JoinColumn(name = "desk_number")
-//    private List<Record> records;
 
 }

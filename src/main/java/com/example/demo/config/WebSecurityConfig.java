@@ -10,9 +10,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.hibernate.criterion.Restrictions.and;
 
+/**
+ * Класс конфигурации доступа по поролю к различным частям сервера (клиентской и админской).
+ */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Создаём роль админа с пароле p1.
+     */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -21,6 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN");
     }
 
+    /**
+     * Прописываем для какого пути какая роль необходима.
+     * "/admin/**" -> роль админа
+     * "/**"-> любой пользователь
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
